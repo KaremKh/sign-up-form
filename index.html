@@ -1,0 +1,154 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="left">
+                <div class="box">
+                    <img src="images/odin-lined.png" alt="">
+                    <h2 class="logo-text">Campy</h2>
+                </div>
+                <img src="images/photo-1678029339080-c00ea917907a.avif" alt="">
+            </div>
+            <div class="right">
+                <div class="header">
+                    <h3>Discover the beauty of the great outdoors with our camping website! From stunning campsites to thrilling outdoor activities, we have everything you need to plan your next adventure. Sign up now to receive exclusive access to our expert camping tips, destination recommendations, and more. Let's make your next camping trip unforgettable!</h3>
+                </div>
+                <div class="form">
+                    <form action="">
+                        <legend>Let's do this!</legend>
+                        <h3 id="successful" style="color: rgb(0, 103, 34); font-size: 20px;"></h3>
+                        <div class="input-row">
+                            <div class="input-field">
+                                <label for="fname">First Name</label>
+                                <input type="text" id="fname" required pattern="^[a-zA-Z ]+$" title="The first name must contain letters and spaces only">
+                            </div>
+                            <div class="input-field">
+                                <label for="lname">Last Name</label>
+                                <input type="text" id="lname" required pattern="^[a-zA-Z ]+$" title="The first name must contain letters and spaces only">
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="input-row">
+                            <div class="input-field">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" required> 
+                            </div>
+                            
+                            <div class="input-field">
+                                <label for="phoneno">Phone Number</label>
+                                <input type="tel" id="phoneno" required minlength="9" maxlength="9" pattern="^[0-9]+$" title="Phone number must contain digits only">
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="input-row">
+                            <div class="input-field">
+                                <label for="pw">Password</label>
+                                <input type="password" name="" id="pw" required minlength="6">
+                            </div>
+                            <div class="input-field">
+                                <label for="cpw">Confirm Password</label>
+                                <input type="password" name="" id="cpw" required>
+                                <p style="color: red; font-size: 12px;" id="error-m"></p>
+                            </div>
+                            
+                        </div>
+                        <div class="submit">
+                            <input type="submit" id="submit" value="Sign Up">
+                            <p>already have an account? <a href="#">Log In</a> </p>
+                        </div>
+                        
+                    </form>
+                </div>
+        
+            </div>
+        </div>
+        <script>
+            
+            const form = document.querySelector('form');
+            const submitButton = document.getElementById("submit");
+            
+            submitButton.addEventListener("click", function(event) {
+                
+                const passwordInput = document.getElementById("pw");
+                const confirmPasswordInput = document.getElementById("cpw");
+                let errorMessage = document.getElementById("error-m");
+                let successful= document.getElementById("successful");
+
+                if (passwordInput.value === '') {
+                    event.preventDefault();
+                    passwordInput.style.borderColor="red";
+                    passwordInput.style.borderWidth="2px";
+
+                    confirmPasswordInput.style.borderColor="red";
+                    confirmPasswordInput.style.borderWidth="2px";
+
+                    errorMessage.textContent="*Passwords can't be empty";
+                    return false;
+                }
+
+                if (passwordInput.value !== confirmPasswordInput.value) {
+                    event.preventDefault();
+                    passwordInput.style.borderColor="red";
+                    passwordInput.style.borderWidth="2px";
+
+                    confirmPasswordInput.style.borderColor="red";
+                    confirmPasswordInput.style.borderWidth="2px";
+
+                    errorMessage.textContent="*Passwords don't match";
+                    return false;
+                }
+
+                
+                event.preventDefault();
+                if (form.checkValidity()) {
+                    successful.textContent="Successfully Signed Up!";
+                    errorMessage.textContent="";
+                    passwordInput.style.borderWidth="1px";
+                    confirmPasswordInput.style.borderWidth="1px";
+                    passwordInput.style.borderColor="rgb(126, 123, 123)";
+                    confirmPasswordInput.style.borderColor="rgb(126, 123, 123)";
+                    form.reset();
+                }
+            });
+
+            const inputFields = document.querySelectorAll('.input-field input');
+
+            inputFields.forEach((input) => {
+            input.addEventListener('focus', () => {
+                
+                document.getElementById('successful').textContent = '';
+                document.getElementById('error-m').textContent = '';
+                
+                
+                if (input.id=="pw"){
+                    document.getElementById("pw").style.cssText="border-color: var(--primary-color); border-width: 2px;";
+                }
+                else {
+                    document.getElementById("pw").style.borderWidth="1px";
+                    document.getElementById("pw").style.borderColor="rgb(126, 123, 123)";
+                }
+                
+                if (input.id=="cpw"){
+                    document.getElementById("cpw").style.cssText="border-color: var(--primary-color); border-width: 2px;";
+                }
+                else {
+                    document.getElementById("cpw").style.borderWidth="1px";
+                    document.getElementById("cpw").style.borderColor="rgb(126, 123, 123)";
+                }
+                
+            });
+            });
+
+        </script>
+        
+    </body>
+    </html>
